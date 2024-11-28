@@ -1,0 +1,181 @@
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #141414;
+  color: #ffffff;
+}
+
+.movie-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #000;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #e50914;
+  flex-shrink: 0;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background-color: #222;
+  padding: 8px 12px;
+  border-radius: 25px;
+  width: 300px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+}
+
+.search-box:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+.search-box .search-icon {
+  margin-right: 10px;
+  color: #e50914;
+  font-size: 18px;
+}
+
+.search-box input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #fff;
+  outline: none;
+  font-size: 16px;
+}
+
+.search-box input::placeholder {
+  color: #bbb;
+}
+
+/* Container */
+.container {
+  flex: 1;
+  padding: 20px 40px;
+}
+
+/* Sections */
+.section-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #e50914;
+}
+
+/* Movie List */
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.movie-card {
+  position: relative;
+  background-color: #222;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.movie-poster {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+}
+
+.movie-info {
+  padding: 10px;
+  text-align: center;
+}
+
+.movie-info h3 {
+  margin: 10px 0 5px 0;
+  font-size: 18px;
+  color: #fff;
+}
+
+.movie-info p {
+  margin: 0;
+  color: #bbb;
+}
+
+/* Favourite Icon */
+.favourite-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.favourite-icon:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Footer */
+.footer {
+  background-color: #000;
+  padding: 20px 40px;
+  text-align: center;
+  color: #bbb;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .logo h1 {
+    margin: 0 0 10px 0;
+    text-align: center;
+  }
+
+  .search-box {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .container {
+    padding: 20px 20px;
+  }
+
+  .movie-info h3 {
+    font-size: 16px;
+  }
+
+  .movie-info p {
+    font-size: 14px;
+  }
+}

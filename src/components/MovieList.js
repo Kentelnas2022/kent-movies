@@ -1,26 +1,12 @@
 import React from 'react';
+import MovieCard from './MovieCard';
 
-const MovieList = ({ movies, handleFavouritesClick, favouriteComponent: FavouriteComponent }) => {
-  return (
-    <div className="movie-list">
-      {movies.map((movie) => (
-        <div className="movie-card" key={movie.imdbID}>
-          <img
-            src={movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/200x300?text=No+Image'}
-            alt={movie.Title}
-            className="movie-poster"
-          />
-          <div className="movie-info">
-            <h3>{movie.Title}</h3>
-            <p>{movie.Year}</p>
-          </div>
-          <div onClick={() => handleFavouritesClick(movie)}>
-            <FavouriteComponent />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
+const MovieList = ({ movies }) => (
+  <div className="movie-list">
+    {movies.map((movie) => (
+      <MovieCard key={movie.imdbID} movie={movie} />
+    ))}
+  </div>
+);
 
 export default MovieList;

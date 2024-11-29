@@ -1,75 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
-import MovieList from './components/MovieList';
-import AddFavourites from './components/AddFavourites';
-import RemoveFavourites from './components/RemoveFavourites';
 import Footer from './components/Footer';
+import SearchBar from './components/SearchBar';
+import MovieList from './components/MovieList';
 
 const App = () => {
   const [movies, setMovies] = useState([]);
-  const [favourites, setFavourites] = useState([]);
-  const [searchValue, setSearchValue] = useState('Batman'); 
+  const [searchValue, setSearchValue] = useState('Avengers');
 
-  const getMovieRequest = async (searchValue) => {
+  // Fetch movies from the API
+  const fetchMovies = async () => {
     const url = `https://www.omdbapi.com/?s=${searchValue}&apikey=541c907d`;
-
-    const response = await fetch(url);
-    const responseJson = await response.json();
-
-    if (responseJson.Search) {
-      setMovies(responseJson.Search);
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data.Search) {
+        setMovies(data.Search);
+      } else {
+        setMovies([]); // Clear movies if no results are found
+      }
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+      setMovies([]);
     }
   };
 
   useEffect(() => {
-    getMovieRequest(searchValue);
-  }, [searchValue]);
-
-  useEffect(() => {
-    const movieFavourites = JSON.parse(localStorage.getItem('react-movie-app-favourites'));
-    if (movieFavourites) {
-      setFavourites(movieFavourites);
-    }
-  }, []);
-
-  const saveToLocalStorage = (items) => {
-    localStorage.setItem('react-movie-app-favourites', JSON.stringify(items));
-  };
-
-  const addFavouriteMovie = (movie) => {
-    const newFavouriteList = [...favourites, movie];
-    setFavourites(newFavouriteList);
-    saveToLocalStorage(newFavouriteList);
-  };
-
-  const removeFavouriteMovie = (movie) => {
-    const newFavouriteList = favourites.filter((favourite) => favourite.imdbID !== movie.imdbID);
-    setFavourites(newFavouriteList);
-    saveToLocalStorage(newFavouriteList);
-  };
+    fetchMovies();
+  }, [searchValue]); // Fetch movies when `searchValue` changes
 
   return (
-    <div className="movie-app">
-      <Header searchValue={searchValue} setSearchValue={setSearchValue} />
-      <div className="container">
-        <section className="movies-section">
-          <h2 className="section-title">Movies</h2>
-          <MovieList
-            movies={movies}
-            handleFavouritesClick={addFavouriteMovie}
-            favouriteComponent={AddFavourites}
-          />
-        </section>
-        <section className="favourites-section">
-          <h2 className="section-title">Favourites</h2>
-          <MovieList
-            movies={favourites}
-            handleFavouritesClick={removeFavouriteMovie}
-            favouriteComponent={RemoveFavourites}
-          />
-        </section>
-      </div>
+    <div className="app">
+      <Header />
+      <SearchBar setSearchValue={setSearchValue} />
+      <MovieList movies={movies} />
       <Footer />
     </div>
   );

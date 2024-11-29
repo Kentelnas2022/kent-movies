@@ -1,15 +1,11 @@
 import React from 'react';
-import SearchBox from './SearchBox';
 
-const Header = ({ searchValue, setSearchValue }) => {
-  return (
-    <header className="header">
-      <div className="logo">
-        <h2>Kent Movies</h2>
-      </div>
-      <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
-    </header>
-  );
-};
+const Header = () => (
+  <header className="header">
+    <div className="header-container">
+      <h1 className="logo">MovieFlix</h1>
+    </div>
+  </header>
+);
 
 export default Header;

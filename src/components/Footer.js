@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Footer = () => (
+const Footer = ({ footerText }) => (
   <footer className="footer">
-    <p>© 2024 MovieFlix. All Rights Reserved.</p>
+    <p>{footerText}</p>
   </footer>
 );
 

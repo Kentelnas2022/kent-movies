@@ -9,33 +9,32 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState('Avengers');
 
-  // Fetch movies from the API
-  const fetchMovies = async () => {
-    const url = `https://www.omdbapi.com/?s=${searchValue}&apikey=541c907d`;
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      if (data.Search) {
-        setMovies(data.Search);
-      } else {
-        setMovies([]); // Clear movies if no results are found
-      }
-    } catch (error) {
-      console.error('Error fetching movies:', error);
-      setMovies([]);
-    }
-  };
-
   useEffect(() => {
+    const fetchMovies = async () => {
+      const url = `https://www.omdbapi.com/?s=${searchValue}&apikey=541c907d`;
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.Search) {
+          setMovies(data.Search);
+        } else {
+          setMovies([]);
+        }
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+        setMovies([]);
+      }
+    };
+
     fetchMovies();
-  }, [searchValue]); // Fetch movies when `searchValue` changes
+  }, [searchValue]);
 
   return (
     <div className="app">
-      <Header />
+      <Header title="MovieFlix" />
       <SearchBar setSearchValue={setSearchValue} />
       <MovieList movies={movies} />
-      <Footer />
+      <Footer footerText="© 2024 MovieFlix. All Rights Reserved." />
     </div>
   );
 };
